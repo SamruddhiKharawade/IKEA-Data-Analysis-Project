@@ -1,5 +1,11 @@
 # IKEA Data Analysis Project | SQL Server, Python & Power BI
 
+<img width="986" height="622" alt="image" src="https://github.com/user-attachments/assets/582d8e8f-adc9-4746-a01b-91c8197279a4" />
+<img width="987" height="620" alt="image" src="https://github.com/user-attachments/assets/47bea829-8726-4a69-a92c-a30f55bef24e" />
+<img width="987" height="621" alt="image" src="https://github.com/user-attachments/assets/ae9c4536-5c30-447e-a8ca-d49b5c36d7f8" />
+
+
+
 ## Disclaimer
 
 **IKEA Gifting** is a fictional business concept created for this educational data analytics project. This project is not affiliated with, endorsed by, or representative of the actual IKEA corporation. All financial figures, customer metrics, and business insights are calculated from a publicly available, anonymized transactional dataset and do not represent IKEA's actual business performance. IKEA-inspired branding is used solely for dashboard design and visualization purposes.
