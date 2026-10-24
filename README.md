@@ -1,9 +1,10 @@
 # IKEA Data Analysis Project | SQL Server, Python & Power BI
 
 <img width="986" height="622" alt="image" src="https://github.com/user-attachments/assets/582d8e8f-adc9-4746-a01b-91c8197279a4" />
-<img width="987" height="620" alt="image" src="https://github.com/user-attachments/assets/47bea829-8726-4a69-a92c-a30f55bef24e" />
-<img width="987" height="621" alt="image" src="https://github.com/user-attachments/assets/ae9c4536-5c30-447e-a8ca-d49b5c36d7f8" />
 
+<img width="987" height="620" alt="image" src="https://github.com/user-attachments/assets/47bea829-8726-4a69-a92c-a30f55bef24e" />
+
+<img width="987" height="621" alt="image" src="https://github.com/user-attachments/assets/ae9c4536-5c30-447e-a8ca-d49b5c36d7f8" />
 
 
 ## Disclaimer
@@ -78,140 +79,198 @@ I selected this dataset to work with realistic data quality challenges and demon
 | Power BI Desktop | Creating interactive business intelligence dashboards |
 | DAX | Developing measures for revenue, customer counts, churn, and customer value |
 
-Core Concepts Implemented
+## Core Concepts Implemented
 
-1. Data Cleaning and Validation
-
+### 1. Data Cleaning and Validation
 I processed the raw transactional dataset using SQL Server, addressing data quality issues such as inconsistent date formats, invalid values, duplicate records, and missing customer identifiers.
 
 I used SQL conversion functions and window functions to standardize data types, identify duplicate transactions, and validate the cleaned dataset.
 
-2. RFM Analysis
+### 2. RFM Analysis
+I implemented **Recency, Frequency, and Monetary (RFM) analysis** to evaluate customer purchasing behavior.
 
-I implemented Recency, Frequency, and Monetary (RFM) analysis to evaluate customer purchasing behavior.
-
-Recency: How recently a customer made a purchase.
-
-Frequency: How often a customer purchased.
-
-Monetary: How much a customer spent.
+- **Recency:** How recently a customer made a purchase.
+- **Frequency:** How often a customer purchased.
+- **Monetary:** How much a customer spent.
 
 I calculated these metrics for individual customers and assigned scores on a 1–5 scale to support customer evaluation and segmentation.
 
-3. Customer Segmentation
-
+### 3. Customer Segmentation
 Using the RFM scores, I grouped customers into six business-oriented segments:
 
-Champions
-
-Loyal
-
-At Risk
-
-New
-
-Needs Attention
-
-Lost
+- Champions
+- Loyal
+- At Risk
+- New
+- Needs Attention
+- Lost
 
 This segmentation helps distinguish high-value customers from customers who may require additional engagement or retention efforts.
 
-4. Churn Analysis
-
+### 4. Churn Analysis
 I implemented a rule-based churn indicator using a 90-day inactivity threshold.
 
 This approach identifies customers who have not purchased recently, allowing the business to investigate potential retention opportunities.
 
 The metric represents inactivity-based churn under the project's chosen definition, rather than confirmed customer attrition.
 
-5. Business Intelligence and Data Visualization
-
+### 5. Business Intelligence and Data Visualization
 I prepared an analysis-ready dataset combining transactional information with customer segmentation results.
 
 Using Power BI and DAX, I developed interactive visualizations to monitor business performance, compare customer segments, and analyze trends over time.
 
-Project Workflow
+---
 
-Step 1: Business Requirements and Planning
+## Project Workflow
 
+### Step 1: Business Requirements and Planning
 I defined the business problem, analytical objectives, key performance indicators, and business questions before beginning the technical implementation.
 
 This helped align the data preparation and visualization stages with the intended business outcomes.
 
-Step 2: Data Cleaning and Exploration Using SQL Server
-
+### Step 2: Data Cleaning and Exploration Using SQL Server
 I imported the raw transaction data into SQL Server and performed data preparation and validation.
 
 My work included:
 
-Standardizing inconsistent date formats.
-
-Converting columns to appropriate data types.
-
-Identifying and removing duplicate records.
-
-Handling invalid transaction values.
-
-Investigating missing customer identifiers.
-
-Validating record counts throughout the cleaning process.
+- Standardizing inconsistent date formats.
+- Converting columns to appropriate data types.
+- Identifying and removing duplicate records.
+- Handling invalid transaction values.
+- Investigating missing customer identifiers.
+- Validating record counts throughout the cleaning process.
 
 The original project analysis reports the removal of 32,907 exact duplicate rows. I retained row-count validation as part of the data quality workflow.
 
-Step 3: Customer Analytics Using Python
-
+### Step 3: Customer Analytics Using Python
 I used Python and Pandas to calculate customer-level Recency, Frequency, and Monetary metrics.
 
 I then scored customers across the three RFM dimensions, assigned them to six customer segments, and created a churn indicator based on 90 days of inactivity.
 
 The resulting customer-level analysis provided the foundation for the dashboard's segmentation and retention metrics.
 
-Step 4: Dashboard Development Using Power BI
-
+### Step 4: Dashboard Development Using Power BI
 I integrated the customer segmentation results with the cleaned transactional data to prepare a dataset for reporting.
 
 I developed a three-page Power BI report containing headline KPIs, revenue trends, customer segmentation analysis, and churn-related visualizations.
 
 I also incorporated interactive filters and navigation features to make the report easier to explore.
 
-Dashboard Structure
+---
 
-Page 1: Home
+## Dashboard Structure
 
+### Page 1: Home
 The home page introduces the project and provides navigation to the main report pages.
 
 It also includes a glossary explaining key concepts such as Recency, Frequency, Monetary value, and churn.
 
-Page 2: Business Overview
-
+### Page 2: Business Overview
 This page provides a high-level view of business performance through key metrics, including:
 
-Total customers
-
-Total revenue
-
-Customer churn percentage
-
-Average customer value
+- Total customers
+- Total revenue
+- Customer churn percentage
+- Average customer value
 
 It also includes customer and revenue comparisons, segment-level breakdowns, and monthly, quarterly, and yearly trends.
 
 Interactive filters allow users to explore results by date, country, customer segment, and churn status.
 
-Page 3: RFM Analysis
-
+### Page 3: RFM Analysis
 This page focuses on customer segmentation and customer value.
 
 It includes:
 
-Customer count by segment
-
-Revenue contribution by segment
-
-Average RFM scores
-
-Average customer value across segments
-
-Churn trends over time
+- Customer count by segment
+- Revenue contribution by segment
+- Average RFM scores
+- Average customer value across segments
+- Churn trends over time
 
 These visualizations help identify high-value customer groups and segments that may need targeted retention strategies.
+
+---
+
+## Sample SQL Query: Handling Mixed Date Formats
+
+I used `TRY_CONVERT` to safely attempt date conversions and `COALESCE` to select the first successful conversion.
+
+```sql
+SELECT
+    Invoice,
+    StockCode,
+    Description,
+    Quantity,
+    COALESCE(
+        TRY_CONVERT(datetime2, InvoiceDate, 120),
+        TRY_CONVERT(datetime2, InvoiceDate, 105)
+    ) AS InvoiceDate,
+    TRY_CONVERT(decimal(10,2), Price) AS Price,
+    Customer_ID,
+    Country
+INTO dbo.RetailCombined
+FROM dbo.[Year 2009-2010];
+```
+
+This approach helps handle multiple date formats while preventing conversion failures from stopping the query.
+
+*The exact conversion styles should be verified against the date formats in the source data.*
+
+## Sample Python Code: RFM Scoring
+
+I used Pandas to assign customer scores across the three RFM dimensions.
+
+```python
+rfm['R_Score'] = pd.qcut(
+    rfm['Recency'],
+    5,
+    labels=[5, 4, 3, 2, 1]
+).astype(int)
+
+rfm['F_Score'] = pd.qcut(
+    rfm['Frequency'].rank(method='first'),
+    5,
+    labels=[1, 2, 3, 4, 5]
+).astype(int)
+
+rfm['M_Score'] = pd.qcut(
+    rfm['Monetary'],
+    5,
+    labels=[1, 2, 3, 4, 5]
+).astype(int)
+```
+
+For Recency, lower values represent more recent purchases, so the scoring order is reversed. For Frequency and Monetary value, higher values receive higher scores.
+
+## How to Run the Project
+
+Follow these steps to reproduce the analysis:
+
+1. Download the Online Retail II dataset from the UCI Machine Learning Repository.
+2. Open SQL Server Management Studio and connect to your SQL Server instance.
+3. Execute the SQL scripts in the `01_sql` directory in the specified order to recreate the cleaned dataset.
+4. Export the cleaned data to CSV.
+5. Open the Python notebook in the `02_python` directory and execute the analysis to generate customer-level RFM scores, segments, and churn indicators.
+6. Open the Power BI report in the `03_powerbi` directory.
+7. Update the data source path to point to the exported dataset and refresh the report.
+
+**Prerequisites:** SQL Server, SQL Server Management Studio, Python, Pandas, Jupyter Notebook, and Power BI Desktop.
+
+## Learning Outcomes
+
+Through this project, I gained practical experience in:
+
+- Cleaning and validating large transactional datasets using SQL.
+- Performing customer-level analytics using Python and Pandas.
+- Applying RFM analysis to evaluate customer value.
+- Developing customer segmentation and inactivity-based churn indicators.
+- Building interactive dashboards using Power BI and DAX.
+- Translating analytical results into business insights and potential retention strategies.
+- Connecting business requirements with data preparation, analysis, and visualization.
+
+## Acknowledgements
+
+This project uses the publicly available Online Retail II dataset from the UCI Machine Learning Repository, contributed by Daqing Chen.
+
+The dataset is used for educational and analytical purposes. IKEA-inspired branding is used only as a fictional business scenario for demonstrating data analytics and dashboard design.
