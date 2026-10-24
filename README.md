@@ -78,14 +78,140 @@ I selected this dataset to work with realistic data quality challenges and demon
 | Power BI Desktop | Creating interactive business intelligence dashboards |
 | DAX | Developing measures for revenue, customer counts, churn, and customer value |
 
-## Core Concepts Implemented
+Core Concepts Implemented
 
-### 1. Data Cleaning and Validation
+1. Data Cleaning and Validation
+
 I processed the raw transactional dataset using SQL Server, addressing data quality issues such as inconsistent date formats, invalid values, duplicate records, and missing customer identifiers.
 
 I used SQL conversion functions and window functions to standardize data types, identify duplicate transactions, and validate the cleaned dataset.
 
-### 2. RFM Analysis
-I implemented **Recency, Frequency, and Monetary (RFM) analysis** to evaluate customer purchasing behavior.
+2. RFM Analysis
 
-- **Rec
+I implemented Recency, Frequency, and Monetary (RFM) analysis to evaluate customer purchasing behavior.
+
+Recency: How recently a customer made a purchase.
+
+Frequency: How often a customer purchased.
+
+Monetary: How much a customer spent.
+
+I calculated these metrics for individual customers and assigned scores on a 1–5 scale to support customer evaluation and segmentation.
+
+3. Customer Segmentation
+
+Using the RFM scores, I grouped customers into six business-oriented segments:
+
+Champions
+
+Loyal
+
+At Risk
+
+New
+
+Needs Attention
+
+Lost
+
+This segmentation helps distinguish high-value customers from customers who may require additional engagement or retention efforts.
+
+4. Churn Analysis
+
+I implemented a rule-based churn indicator using a 90-day inactivity threshold.
+
+This approach identifies customers who have not purchased recently, allowing the business to investigate potential retention opportunities.
+
+The metric represents inactivity-based churn under the project's chosen definition, rather than confirmed customer attrition.
+
+5. Business Intelligence and Data Visualization
+
+I prepared an analysis-ready dataset combining transactional information with customer segmentation results.
+
+Using Power BI and DAX, I developed interactive visualizations to monitor business performance, compare customer segments, and analyze trends over time.
+
+Project Workflow
+
+Step 1: Business Requirements and Planning
+
+I defined the business problem, analytical objectives, key performance indicators, and business questions before beginning the technical implementation.
+
+This helped align the data preparation and visualization stages with the intended business outcomes.
+
+Step 2: Data Cleaning and Exploration Using SQL Server
+
+I imported the raw transaction data into SQL Server and performed data preparation and validation.
+
+My work included:
+
+Standardizing inconsistent date formats.
+
+Converting columns to appropriate data types.
+
+Identifying and removing duplicate records.
+
+Handling invalid transaction values.
+
+Investigating missing customer identifiers.
+
+Validating record counts throughout the cleaning process.
+
+The original project analysis reports the removal of 32,907 exact duplicate rows. I retained row-count validation as part of the data quality workflow.
+
+Step 3: Customer Analytics Using Python
+
+I used Python and Pandas to calculate customer-level Recency, Frequency, and Monetary metrics.
+
+I then scored customers across the three RFM dimensions, assigned them to six customer segments, and created a churn indicator based on 90 days of inactivity.
+
+The resulting customer-level analysis provided the foundation for the dashboard's segmentation and retention metrics.
+
+Step 4: Dashboard Development Using Power BI
+
+I integrated the customer segmentation results with the cleaned transactional data to prepare a dataset for reporting.
+
+I developed a three-page Power BI report containing headline KPIs, revenue trends, customer segmentation analysis, and churn-related visualizations.
+
+I also incorporated interactive filters and navigation features to make the report easier to explore.
+
+Dashboard Structure
+
+Page 1: Home
+
+The home page introduces the project and provides navigation to the main report pages.
+
+It also includes a glossary explaining key concepts such as Recency, Frequency, Monetary value, and churn.
+
+Page 2: Business Overview
+
+This page provides a high-level view of business performance through key metrics, including:
+
+Total customers
+
+Total revenue
+
+Customer churn percentage
+
+Average customer value
+
+It also includes customer and revenue comparisons, segment-level breakdowns, and monthly, quarterly, and yearly trends.
+
+Interactive filters allow users to explore results by date, country, customer segment, and churn status.
+
+Page 3: RFM Analysis
+
+This page focuses on customer segmentation and customer value.
+
+It includes:
+
+Customer count by segment
+
+Revenue contribution by segment
+
+Average RFM scores
+
+Average customer value across segments
+
+Churn trends over time
+
+These visualizations help identify high-value customer groups and segments that may need targeted retention strategies.
